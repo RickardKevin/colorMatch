@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!--Testing out the HTML-->
 <!DOCTYPE html>
 <html lang="en">
@@ -8,35 +9,41 @@
     <script src="script.js"></script>
   </head>
   <body>  
-    <div id = "outerBox" class = "box">
-	outer box
+    <!--div id = "outerBox" class = "box">
+	outer box 
 
 	<!--color box-->
-		<div id = "colorBox" class = "box">		
-			Color Box
+		<div id = "colorBox" class = "box">					
 		</div>
 		
 		<!--Sliders Div-->
 		<div class = "slidersBox">
+		
 		<!--sliders-->
 			<div id = " sliders" >		
 			<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+			<input type="range" min="1" max="255" value="127" class="slider" id="redSlider"
+			oninput="sliderChange(this.value)">
 			</div>
 			</div>	
 			
 			<div id = " sliders" >		
 			<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+			<input type="range" min="1" max="255" value="127" class="slider" id="greenSlider">
 			</div>
 			</div>
 			
 			<div id = " sliders" >		
 			<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+			<input type="range" min="1" max="255" value="127" class="slider" id="blueSlider">
+			<output id="output"></output>
 			</div>
 			</div>	
 		</div>
+		<div id ="sliders">
+		<button onclick="setRandomColor()">Random Color</button>
+		<label id ="demo">Hi</label>
 		</div>
+		<!--/div-->
   </body>
 </html>

@@ -17,19 +17,27 @@
 
 #colorBox
 {
-	position: relative;	
-	top: 2em;
+	position: float center;	
+	display:block; 
+	margin-bottom:1px;
+	top: 5em;
 	height: 40%;
+	width: 30%
 }
 
 .slidersBox
 {    
 	position: relative;
+	  display: block;
+	margin-left: auto;
+	margin-right: auto;
 	float:left; 
-	display:inline; 
+	top: 7em;
+	display:block; 
 	width: 99%;		
-	border: solid black;
+	/*border: solid black;*/
 }
+
 
 #outerBox
 {
@@ -44,8 +52,10 @@
 
 .slider {	
 	position: relative;
-	float:left; 
-	
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float:left ; 	
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     width: 15%; /* Full-width */
@@ -55,6 +65,7 @@
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
+	/*margin: 0em 0em 0em 15em;*/
 }
 
 /* Mouse-over effects */
@@ -77,4 +88,13 @@
     height: 25px; /* Slider handle height */
     /*background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
+}
+
+button
+{
+		position: relative;
+		top: 9em;
+		right: 0;		
+		margin-right: auto;
+		margin-left: auto;		
 }

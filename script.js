@@ -1,6 +1,11 @@
 var slider = document.getElementById("redSlider");
 var output = document.getElementById("demo");
 var boxColor =  $("#colorBox").css("background-color", getRandomColor());
+var outputColor = "";
+var originalColor = boxColor;
+var red=255;
+var green=255;
+var blue=255;
 //output.innerHTML = slider.value; //Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
@@ -23,9 +28,28 @@ function setRandomColor() {
   $("#colorBox").css("border-style", "none");  
 }
 
-function sliderChange(val) {
-document.getElementById('outputTest').innerHTML=val;
-  labelTemp.text=color;
+function redSliderChange(val) {		
+	document.getElementById('redSlider').innerHTML=val;						
+	red = val;
+}
+function greenSliderChange(val) {
+		
+	document.getElementById('greenSlider').innerHTML=val;						
+	green = val;
+}
+function blueSliderChange(val) {		
+	document.getElementById('blueSlider').innerHTML=val;						
+	blue = val;
+	console.log(red, " ", green, " ", blue);
 }
 
-document.getElementById('slider').value="50";
+function setBoxColor() {	
+	temp=""
+	outputColor=temp.concat("rgb(",red,",",green,",",blue,")");
+	//document.getElementById('colorBox').style.backgroundColor
+	console.log(outputColor);
+	$("#colorBox").css("background-color", outputColor);
+}
+
+
+//document.getElementById('slider').value="50";

@@ -31,16 +31,19 @@ function setRandomColor() {
 function redSliderChange(val) {		
 	document.getElementById('redSlider').innerHTML=val;						
 	red = val;
+	setBoxColor()
 }
 function greenSliderChange(val) {
 		
 	document.getElementById('greenSlider').innerHTML=val;						
 	green = val;
+	setBoxColor()
 }
 function blueSliderChange(val) {		
 	document.getElementById('blueSlider').innerHTML=val;						
 	blue = val;
 	console.log(red, " ", green, " ", blue);
+	setBoxColor()
 }
 
 function setBoxColor() {	

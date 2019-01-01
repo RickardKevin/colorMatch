@@ -1,8 +1,8 @@
 var slider = document.getElementById("redSlider");
 var output = document.getElementById("demo");
-var boxColor =  $("#colorBox").css("background-color", getRandomColor());
+var boxColor = "";
 var outputColor = "";
-var originalColor = boxColor;
+var originalColor = "";
 var red=255;
 var green=255;
 var blue=255;
@@ -24,7 +24,9 @@ function getRandomColor() {
 }
 
 function setRandomColor() {	
-  $("#colorBox").css("background-color", getRandomColor());
+var temp =  getRandomColor();
+originalColor = temp;
+  $("#colorBox").css("background-color", temp);
   $("#colorBox").css("border-style", "none");  
 }
 
@@ -54,5 +56,69 @@ function setBoxColor() {
 	$("#colorBox").css("background-color", outputColor);
 }
 
+function resetBoxColor() {	
+	temp=""
+	outputColor=temp.concat("rgb(",255,",",255,",",255,")");	
+	$("#colorBox").css("background-color", outputColor);
+}
 
-//document.getElementById('slider').value="50";
+function startGame()
+{
+	setRandomColor();		
+	countUp();
+}
+
+function countUp()
+{
+			document.getElementById("colorBox").innerHTML = "Start!";	
+			var timeleft = 0;
+			var  countdownTimer = setInterval(function(){
+			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
+			  disableButtons();
+			  if(timeleft > 10)
+			  {
+				 resetBoxColor();
+				document.getElementById("colorBox").innerHTML = "";
+				clearInterval(countdownTimer);				
+				enableButtons();
+				//countDown();
+			  }
+			},1000);			
+}
+
+
+function countDown()
+{
+			document.getElementById("colorBox").innerHTML = "Start!";	
+			var timeleft = 0;
+			var  countdownTimer = setInterval(function(){
+			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
+			  disableButtons();
+			  if(timeleft > 10)
+			  {
+				 resetBoxColor();
+				document.getElementById("colorBox").innerHTML = "";
+				clearInterval(countdownTimer);				
+				enableButtons();
+			  }
+			},1000);			
+}
+
+function showOriginalColor()
+{
+	$("#colorBox").css("background-color", originalColor);
+}
+
+function enableButtons()
+{
+		document.getElementById("startButton").disabled = false;
+		document.getElementById("showColorButton").disabled = false;
+		document.getElementById("resetButton").disabled = false;	
+}
+
+function disableButtons()
+{
+		document.getElementById("startButton").disabled = true;
+		document.getElementById("showColorButton").disabled = true;
+		document.getElementById("resetButton").disabled = true;	
+}

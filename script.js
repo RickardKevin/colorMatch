@@ -43,16 +43,14 @@ function greenSliderChange(val) {
 }
 function blueSliderChange(val) {		
 	document.getElementById('blueSlider').innerHTML=val;						
-	blue = val;
-	console.log(red, " ", green, " ", blue);
+	blue = val;	
 	setBoxColor()
 }
 
 function setBoxColor() {	
 	temp=""
 	outputColor=temp.concat("rgb(",red,",",green,",",blue,")");
-	//document.getElementById('colorBox').style.backgroundColor
-	console.log(outputColor);
+	//document.getElementById('colorBox').style.backgroundColor	
 	$("#colorBox").css("background-color", outputColor);
 }
 
@@ -75,13 +73,14 @@ function countUp()
 			var  countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
 			  disableButtons();
+				//add sleep function?
 			  if(timeleft > 10)
 			  {
 				 resetBoxColor();
 				document.getElementById("colorBox").innerHTML = "";
 				clearInterval(countdownTimer);				
 				enableButtons();
-				//countDown();
+				countDown();
 			  }
 			},1000);			
 }
@@ -89,17 +88,16 @@ function countUp()
 
 function countDown()
 {
-			document.getElementById("colorBox").innerHTML = "Start!";	
-			var timeleft = 0;
+			var timeleft = 30;
 			var  countdownTimer = setInterval(function(){
-			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
-			  disableButtons();
-			  if(timeleft > 10)
+			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;
+			  //disableButtons();
+			  if(timeleft <= 0)
 			  {
-				 resetBoxColor();
+				scoreGame();
 				document.getElementById("colorBox").innerHTML = "";
 				clearInterval(countdownTimer);				
-				enableButtons();
+				//enableButtons();
 			  }
 			},1000);			
 }
@@ -114,6 +112,9 @@ function enableButtons()
 		document.getElementById("startButton").disabled = false;
 		document.getElementById("showColorButton").disabled = false;
 		document.getElementById("resetButton").disabled = false;	
+		document.getElementById("redSlider").disabled = false;	
+		document.getElementById("greenSlider").disabled = false;	
+		document.getElementById("blueSlider").disabled = false;	
 }
 
 function disableButtons()
@@ -121,4 +122,39 @@ function disableButtons()
 		document.getElementById("startButton").disabled = true;
 		document.getElementById("showColorButton").disabled = true;
 		document.getElementById("resetButton").disabled = true;	
+		document.getElementById("redSlider").disabled = true;	
+		document.getElementById("greenSlider").disabled = true;	
+		document.getElementById("blueSlider").disabled = true;	
+}
+
+function compareColors()
+{
+	//calculates comparison
+}
+
+function displayComparison()
+{
+	//shows half and half div	
+	var comparDiv = document.createElement("div");	
+	comparDiv.id = "compareBox";
+	//$("#compareBox").css("background-color", originalColor);
+	$("#compareBox").css("background-color", originalColor);
+	document.getElementById("colorBox").appendChild(comparDiv);		
+}
+
+function scoreGame()
+{
+	displayComparison();
+	compareColors();	
+}
+
+function sleep(ms)
+{
+	return new Promise(resolve => setTimeout(resolve,ms));
+}
+
+function test()
+{
+	//	setRandomColor();
+		displayComparison();
 }

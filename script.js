@@ -6,6 +6,14 @@ var originalColor = "";
 var red=255;
 var green=255;
 var blue=255;
+var finalRed=0;
+var finalGreen=0;
+var finalBlue=0;
+var redDist=0;
+var greenDist=0;
+var blueDist=0;
+var finalDist=0;
+var  countdownTimer;
 //output.innerHTML = slider.value; //Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
@@ -15,11 +23,23 @@ var blue=255;
 }*/
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
+  /*var letters = '0123456789ABCDEF';
+  
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
-  }  
+  }  */
+  
+  var color="";
+  var tmp="";
+  red = Math.floor(Math.random() * Math.floor(255));
+  green = Math.floor(Math.random() * Math.floor(255));
+  blue = Math.floor(Math.random() * Math.floor(255));
+  color =tmp.concat("rgb(",red,",",green,",",blue,")");
+  
+  console.log(red);
+  console.log(green);
+  console.log(blue);
+  
   return color;  
 }
 
@@ -58,6 +78,12 @@ function resetBoxColor() {
 	temp=""
 	outputColor=temp.concat("rgb(",255,",",255,",",255,")");	
 	$("#colorBox").css("background-color", outputColor);
+	var elementExists = document.getElementById("compareBox");
+	if (elementExists)
+	{
+		
+			document.getElementById("colorBox").removeChild(elementExists);
+	}
 }
 
 function startGame()
@@ -70,7 +96,7 @@ function countUp()
 {
 			document.getElementById("colorBox").innerHTML = "Start!";	
 			var timeleft = 0;
-			var  countdownTimer = setInterval(function(){
+			countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
 			  disableButtons();
 				//add sleep function?
@@ -89,11 +115,14 @@ function countUp()
 function countDown()
 {
 			var timeleft = 30;
-			var  countdownTimer = setInterval(function(){
+			countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;
 			  //disableButtons();
 			  if(timeleft <= 0)
 			  {
+				finalRed = red;
+				finalGreen = green;
+				finalBlue = blue;
 				scoreGame();
 				document.getElementById("colorBox").innerHTML = "";
 				clearInterval(countdownTimer);				
@@ -115,6 +144,9 @@ function enableButtons()
 		document.getElementById("redSlider").disabled = false;	
 		document.getElementById("greenSlider").disabled = false;	
 		document.getElementById("blueSlider").disabled = false;	
+		document.getElementById("redSlider").style.visibility= "visible";	
+		document.getElementById("greenSlider").style.visibility= "visible";	
+		document.getElementById("blueSlider").style.visibility= "visible";	
 }
 
 function disableButtons()
@@ -125,20 +157,36 @@ function disableButtons()
 		document.getElementById("redSlider").disabled = true;	
 		document.getElementById("greenSlider").disabled = true;	
 		document.getElementById("blueSlider").disabled = true;	
+		document.getElementById("redSlider").style.visibility= "hidden";	
+		document.getElementById("greenSlider").style.visibility= "hidden";	
+		document.getElementById("blueSlider").style.visibility= "hidden";	
+		
 }
 
 function compareColors()
 {
-	//calculates comparison
+		redDist =(red - finalRed);
+		greenDist =(green - finalGreen);
+		blueDist = (blue-finalBlue);
+		finalDist = Math.sqrt(Math.pow(redDist,2) + Math.pow(greenDist,2) + Math.pow(blueDist,2));
+		var finalScore = (redDist+blueDist+greenDist)/3;
+		var tmp ="";
+		var message = tmp.concat("Your Score:", finalScore);
+		
+		window.alert(
+		message
+		);
 }
 
 function displayComparison()
-{
-	//shows half and half div	
+{	
 	var comparDiv = document.createElement("div");	
-	comparDiv.id = "compareBox";
-	//$("#compareBox").css("background-color", originalColor);
+	comparDiv.id = "compareBox";	
 	$("#compareBox").css("background-color", originalColor);
+	//document.getElementById("compareBox").innerHTML = "Original Color";
+	//document.getElementById("colorBox").innerHTML = "Your Color";
+	//$("#compareBox").css("height", originalColor);
+	//document.getElementById("compareBox").style.height = "inherit";
 	document.getElementById("colorBox").appendChild(comparDiv);		
 }
 
@@ -154,7 +202,16 @@ function sleep(ms)
 }
 
 function test()
-{
-	//	setRandomColor();
+{		
 		displayComparison();
+}
+
+function stopTimer()
+{
+	clearTimeout(countdownTimer);	
+	document.getElementById("colorBox").innerHTML = "";
+	enableButtons();
+	displayComparison();
+	scoreGame();
+	
 }

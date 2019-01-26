@@ -6,6 +6,9 @@ var originalColor = "";
 var red=255;
 var green=255;
 var blue=255;
+var originalRed=0;
+var originalGreen=0;
+var originalBlue=0;
 var finalRed=0;
 var finalGreen=0;
 var finalBlue=0;
@@ -14,33 +17,23 @@ var greenDist=0;
 var blueDist=0;
 var finalDist=0;
 var  countdownTimer;
-//output.innerHTML = slider.value; //Display the default slider value
 
-// Update the current slider value (each time you drag the slider handle)
-/*slider.oninput = function() {
-  output.innerHTML = this.value;
-  //boxColor += this.value;
-}*/
 
 function getRandomColor() {
-  /*var letters = '0123456789ABCDEF';
   
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }  */
   
   var color="";
   var tmp="";
   red = Math.floor(Math.random() * Math.floor(255));
   green = Math.floor(Math.random() * Math.floor(255));
   blue = Math.floor(Math.random() * Math.floor(255));
+  originalRed=red;
+  originalBlue=blue;
+  originalGreen=green;
+  
   color =tmp.concat("rgb(",red,",",green,",",blue,")");
   
-  console.log(red);
-  console.log(green);
-  console.log(blue);
-  
-  return color;  
+    return color;  
 }
 
 function setRandomColor() {	
@@ -52,7 +45,7 @@ originalColor = temp;
 
 function redSliderChange(val) {		
 	document.getElementById('redSlider').innerHTML=val;						
-	red = val;
+	red = val;	
 	setBoxColor()
 }
 function greenSliderChange(val) {
@@ -70,7 +63,6 @@ function blueSliderChange(val) {
 function setBoxColor() {	
 	temp=""
 	outputColor=temp.concat("rgb(",red,",",green,",",blue,")");
-	//document.getElementById('colorBox').style.backgroundColor	
 	$("#colorBox").css("background-color", outputColor);
 }
 
@@ -95,12 +87,12 @@ function startGame()
 function countUp()
 {
 			document.getElementById("colorBox").innerHTML = "Start!";	
-			var timeleft = 0;
+			var timeleft = 11;
 			countdownTimer = setInterval(function(){
-			  document.getElementById("colorBox").innerHTML = 0 + ++timeleft;
+			  document.getElementById("colorBox").innerHTML = 0 - --timeleft*-1;
 			  disableButtons();
-				//add sleep function?
-			  if(timeleft > 10)
+				
+			  if(timeleft <= 0)
 			  {
 				 resetBoxColor();
 				document.getElementById("colorBox").innerHTML = "";
@@ -116,17 +108,12 @@ function countDown()
 {
 			var timeleft = 30;
 			countdownTimer = setInterval(function(){
-			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;
-			  //disableButtons();
-			  if(timeleft <= 0)
-			  {
-				finalRed = red;
-				finalGreen = green;
-				finalBlue = blue;
-				scoreGame();
+			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;			  
+			  if(timeleft <= 1)
+			  {								
+				stopTimer();
 				document.getElementById("colorBox").innerHTML = "";
-				clearInterval(countdownTimer);				
-				//enableButtons();
+				clearInterval(countdownTimer);								
 			  }
 			},1000);			
 }
@@ -165,11 +152,14 @@ function disableButtons()
 
 function compareColors()
 {
-		redDist =(red - finalRed);
-		greenDist =(green - finalGreen);
-		blueDist = (blue-finalBlue);
+	
+		redDist =Math.abs(originalRed - finalRed);
+		greenDist =Math.abs(originalGreen - finalGreen);
+		blueDist = Math.abs(originalBlue-finalBlue);
 		finalDist = Math.sqrt(Math.pow(redDist,2) + Math.pow(greenDist,2) + Math.pow(blueDist,2));
-		var finalScore = (redDist+blueDist+greenDist)/3;
+		//(old - new )/ old percentage dist
+		var finalScore = ((((redDist+blueDist+greenDist)/3)-255)/255)*-100.00;
+		//distance from 0
 		var tmp ="";
 		var message = tmp.concat("Your Score:", finalScore);
 		
@@ -192,6 +182,10 @@ function displayComparison()
 
 function scoreGame()
 {
+	console.log("base = RGB(",red,",",green,",",blue,")");
+	console.log("Original = ", originalColor);
+	console.log("final = RGB(",finalRed,",",finalGreen,",",finalBlue,")");
+	
 	displayComparison();
 	compareColors();	
 }
@@ -208,6 +202,9 @@ function test()
 
 function stopTimer()
 {
+	finalRed = red;
+	finalGreen = green;
+	finalBlue = blue;	
 	clearTimeout(countdownTimer);	
 	document.getElementById("colorBox").innerHTML = "";
 	enableButtons();

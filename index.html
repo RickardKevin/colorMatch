@@ -9,48 +9,48 @@
     <script src="script.js"></script>
   </head>
   <body>  
-    <!--div id = "outerBox" class = "box">
-	outer box 
-
+  
+	<div class = "outerDiv">
+	<img src = "colorllama.png" class = "logo"/>
 	<!--color box-->
-		<div id = "colorBox" class = "box">					
-		<div></div>
-		<div></div>
-		</div>
+		<div id = "colorBox" class = "box"></div>
 		
-		<!--Sliders Div-->
+		<!--Sliders Div-->		
 		<div class = "slidersBox">
+			<div  id = "slidersContainer" >
+			<!--sliders-->
+				<div id = " sliders" >		
+				<div class="slidecontainer">
+				<input type="range" min="1" max="255" value="127" class="slider" id="redSlider"
+				oninput="redSliderChange(this.value)">						
+				</div>
+				</div>	
+				
+				<div id = " sliders" >		
+				<div class="slidecontainer">
+				<input type="range" min="1" max="255" value="127" class="slider" id="greenSlider"
+				oninput="greenSliderChange(this.value)">						
+				</div>
+				</div>
+				
+				<div id = " sliders" >		
+				<div class="slidecontainer">
+				<input type="range" min="1" max="255" value="127" class="slider" id="blueSlider"
+				oninput="blueSliderChange(this.value)">
+				<output id="output"></output>						
+				</div>
+				</div>	
+			</div>				
+			</div>
+		</div>	
+				<div class="buttonsBox">
+					<button id ="startButton" onclick="startGame()">Start Game</button>		
+					<!--button id ="showColorButton"onclick="showOriginalColor()">Show Original Color</button-->
+					<button id ="resetButton" onclick="resetBoxColor()">Reset Color</button>			
+					<!--button id ="testing" onclick="setRandomColor()">Set Random Color</button-->			
+					<button id ="compare" onclick="stopTimer()">Compare</button>		
+				</div>
 		
-		<!--sliders-->
-			<div id = " sliders" >		
-			<div class="slidecontainer">
-			<input type="range" min="1" max="255" value="127" class="slider" id="redSlider"
-			oninput="redSliderChange(this.value)">						
-			</div>
-			</div>	
-			
-			<div id = " sliders" >		
-			<div class="slidecontainer">
-			<input type="range" min="1" max="255" value="127" class="slider" id="greenSlider"
-			oninput="greenSliderChange(this.value)">						
-			</div>
-			</div>
-			
-			<div id = " sliders" >		
-			<div class="slidecontainer">
-			<input type="range" min="1" max="255" value="127" class="slider" id="blueSlider"
-			oninput="blueSliderChange(this.value)">
-			<output id="output"></output>						
-			</div>
-			</div>	
-		</div>
-		<div >
-		<button id ="startButton" onclick="startGame()">Start Game</button>		
-		<button id ="showColorButton"onclick="showOriginalColor()">Show Original Color</button>
-		<button id ="resetButton" onclick="resetBoxColor()">Reset Color</button>			
-		<button id ="testing" onclick="setRandomColor()">set random color</button>			
-		<button id ="compare" onclick="stopTimer()">compare</button>			
-		</div>
-		<!--/div-->
+
   </body>
 </html>

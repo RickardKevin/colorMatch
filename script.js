@@ -33,6 +33,8 @@ function getRandomColor() {
   
   color =tmp.concat("rgb(",red,",",green,",",blue,")");
   
+  red=green=blue = 255;
+  
     return color;  
 }
 
@@ -126,7 +128,7 @@ function showOriginalColor()
 function enableButtons()
 {
 		document.getElementById("startButton").disabled = false;
-		document.getElementById("showColorButton").disabled = false;
+		//document.getElementById("showColorButton").disabled = false;
 		document.getElementById("resetButton").disabled = false;	
 		document.getElementById("redSlider").disabled = false;	
 		document.getElementById("greenSlider").disabled = false;	
@@ -139,7 +141,7 @@ function enableButtons()
 function disableButtons()
 {
 		document.getElementById("startButton").disabled = true;
-		document.getElementById("showColorButton").disabled = true;
+		//document.getElementById("showColorButton").disabled = true;
 		document.getElementById("resetButton").disabled = true;	
 		document.getElementById("redSlider").disabled = true;	
 		document.getElementById("greenSlider").disabled = true;	

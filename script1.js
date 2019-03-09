@@ -77,7 +77,7 @@ function setBoxColor() {
 
 function resetBoxColor() {	
 	temp=""
-	outputColor=temp.concat("rgb(",255,",",255,",",255,")");	
+	outputColor=temp.concat("rgb(",127,",",127,",",127,")");	
 	$("#colorBox").css("background-color", outputColor);
 	var elementExists = document.getElementById("compareBox");
 	if (elementExists)

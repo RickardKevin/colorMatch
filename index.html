@@ -1,5 +1,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!--Testing out the HTML-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,6 +8,7 @@
     <title>title</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
   </head>
   <body>  
   
@@ -21,23 +21,23 @@
 		<div class = "slidersBox">
 			<div  id = "slidersContainer" >
 			<!--sliders-->
-				<div id = " sliders" >		
-				<div class="slidecontainer">
-				<input type="range" min="1" max="255" value="127" class="slider" id="redSlider"
+				<div class = "sliders" >		
+				<div class="slidersContainer">
+				<input type="range" min="1" max="255" value="255" class="slider" id="redSlider"
 				oninput="redSliderChange(this.value)">						
 				</div>
 				</div>	
 				
-				<div id = " sliders" >		
-				<div class="slidecontainer">
-				<input type="range" min="1" max="255" value="127" class="slider" id="greenSlider"
+				<div class = "sliders" >		
+				<div class="slidersContainer">
+				<input type="range" min="1" max="255" value="255" class="slider" id="greenSlider"
 				oninput="greenSliderChange(this.value)">						
 				</div>
 				</div>
 				
-				<div id = " sliders" >		
-				<div class="slidecontainer">
-				<input type="range" min="1" max="255" value="127" class="slider" id="blueSlider"
+				<div class = "sliders" >		
+				<div class="slidersContainer">
+				<input type="range" min="1" max="255" value="255" class="slider" id="blueSlider"
 				oninput="blueSliderChange(this.value)">
 				<output id="output"></output>						
 				</div>
@@ -51,7 +51,7 @@
 					<button id ="resetButton" onclick="resetBoxColor()">Reset Color</button>			
 					<!--button id ="speedRound" onclick="speedRound()">Speed Round</button-->			
 					<button id ="compare" onclick="stopTimer()">Compare</button>		
-				</div>
+				</div>		
 		
 
   </body>

@@ -7,9 +7,9 @@ var output = document.getElementById("demo");
 var boxColor = "";
 var outputColor = "";
 var originalColor = "";
-var red=127;
-var green=127;
-var blue=127;
+var red=255;
+var green=255;
+var blue=255;
 var originalRed=0;
 var originalGreen=0;
 var originalBlue=0;
@@ -97,7 +97,7 @@ function startGame()
 function countUp()
 {
 			document.getElementById("colorBox").innerHTML = "Start!";	
-			var timeleft = 11;
+			var timeleft = 6;
 			countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = 0 - --timeleft*-1;
 			  disableButtons();
@@ -198,9 +198,9 @@ function enableButtons()
 		document.getElementById("redSlider").style.visibility= "visible";	
 		document.getElementById("greenSlider").style.visibility= "visible";	
 		document.getElementById("blueSlider").style.visibility= "visible";	
-		document.getElementById("redSlider").value='127';
-		document.getElementById("greenSlider").value='127';
-		document.getElementById("blueSlider").value='127';
+		document.getElementById("redSlider").value='255';
+		document.getElementById("greenSlider").value='255';
+		document.getElementById("blueSlider").value='255';
 }
 
 function disableButtons()
@@ -255,10 +255,14 @@ function speedRound()
 
 function displayComparison()
 {	
+	var originalDiv = document.getElementById('colorBox');
 	var comparDiv = document.createElement("div");	
 	comparDiv.id = "compareBox";	
 	$("#compareBox").css("background-color", originalColor);	
 	document.getElementById("colorBox").appendChild(comparDiv);		
+	comparDiv.innerHTML = "Your Guess";
+	//originalDiv.innerHTML= "Original Color";
+
 }
 
 function scoreGame()

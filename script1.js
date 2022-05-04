@@ -7,9 +7,9 @@ var output = document.getElementById("demo");
 var boxColor = "";
 var outputColor = "";
 var originalColor = "";
-var red=255;
-var green=255;
-var blue=255;
+var red=127;
+var green=127;
+var blue=127;
 var originalRed=0;
 var originalGreen=0;
 var originalBlue=0;
@@ -77,7 +77,7 @@ function setBoxColor() {
 
 function resetBoxColor() {	
 	temp=""
-	outputColor=temp.concat("rgb(",127,",",127,",",127,")");	
+	outputColor=temp.concat("rgb(",255,",",255,",",255,")");	
 	$("#colorBox").css("background-color", outputColor);
 	var elementExists = document.getElementById("compareBox");
 	if (elementExists)
@@ -89,8 +89,9 @@ function resetBoxColor() {
 
 function startGame()
 {
+	resetBoxColor();
 	setRandomColor();		
-	countUp();
+	countUp();	
 }
 
 function countUp()
@@ -112,6 +113,27 @@ function countUp()
 			},1000);
 }
 
+
+
+function countUpFast()
+{
+			document.getElementById("colorBox").innerHTML = "Start!";	
+			var timeleft = 2;
+			countdownTimer = setInterval(function(){
+			  document.getElementById("colorBox").innerHTML = 0 - --timeleft*-1;
+			  disableButtons();
+				
+			  if(timeleft <= 0)
+			  {
+				 resetBoxColor();
+				document.getElementById("colorBox").innerHTML = "";				
+				clearInterval(countdownTimer);				
+				enableButtons();				
+				countDownFast();
+			  }
+			},1000);
+}
+
 function countDown()
 {
 		
@@ -120,21 +142,39 @@ function countDown()
 			countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;			  
 			  if(timeleft < 0)
-			  {								
-				stopTimer();
+			  {												
 				document.getElementById("colorBox").innerHTML = "";				
-				enableStart();
-				clearInterval(countdownTimer);								
+				enableStart();				
+				clearInterval(countdownTimer);																
+				stopTimer();
 			  }
 			},1000);				
 }
+
+function countDownFast()
+{
+		
+		var timeleft = 5;
+		disableStart();
+			countdownTimer = setInterval(function(){
+			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;			  
+			  if(timeleft < 0)
+			  {												
+				document.getElementById("colorBox").innerHTML = "";				
+				enableStart();				
+				clearInterval(countdownTimer);																
+				stopTimer();
+			  }
+			},1000);				
+}
+
 
 function slide()
 {
 	var timeleft = 2;
 	countdownTimer = setInterval(function(){
 			  document.getElementById("colorBox").innerHTML = (0 - --timeleft)*-1;			  
-			  if(timeleft <= 0)
+			  if(timeleft <= 1)
 			  {												
 				document.getElementById("colorBox").innerHTML = "Slide the Sliders";				
 				clearInterval(countdownTimer);								
@@ -204,6 +244,13 @@ function compareColors()
 		message
 		);
 		
+}
+
+function speedRound()
+{
+		setRandomColor();
+		countUpFast();
+		countDownFast();
 }
 
 function displayComparison()

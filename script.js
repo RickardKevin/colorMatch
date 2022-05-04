@@ -255,14 +255,18 @@ function speedRound()
 
 function displayComparison()
 {	
+	temp="";
+	temp2 = "";
+	newColor=temp.concat("rgb(",finalRed,",",finalGreen,",",finalBlue,")");
+	oldColor =temp2.concat("rgb(",originalRed,",",originalGreen,",",originalBlue,")");
+	console.log(outputColor);
 	var originalDiv = document.getElementById('colorBox');
-	var comparDiv = document.createElement("div");	
-	comparDiv.id = "compareBox";	
-	$("#compareBox").css("background-color", originalColor);	
-	document.getElementById("colorBox").appendChild(comparDiv);		
+	var comparDiv = document.createElement("div");
+	comparDiv.id = "compareBox";
+	document.getElementById("colorBox").appendChild(comparDiv);
+	$("#compareBox").css("background-color", outputColor);
 	comparDiv.innerHTML = "Your Guess";
-	//originalDiv.innerHTML= "Original Color";
-
+	$('#colorBox').css("background-color", oldColor);
 }
 
 function scoreGame()

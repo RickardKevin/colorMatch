@@ -260,7 +260,7 @@ button:hover
 		#colorBox{
 			line-height: 125px;
 		}
-		#compareBox{
+		#compareBox, #origInfo{
 			font-size: 13px;
 		}
 }	

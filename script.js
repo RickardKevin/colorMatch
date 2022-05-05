@@ -20,6 +20,7 @@ var redDist=0;
 var greenDist=0;
 var blueDist=0;
 var finalDist=0;
+var redCompare = greenCompare = blueCompare = 0;
 var  countdownTimer;
 
 
@@ -49,49 +50,47 @@ function setRandomColor() {
 var temp =  getRandomColor();
 originalColor = temp;
   $("#colorBox").css("background-color", temp);
-  $("#colorBox").css("border-style", "none");  
+  $("#colorBox").css("border-style", "none");
 }
 
-function redSliderChange(val) {		
-	document.getElementById('redSlider').innerHTML=val;						
-	red = val;	
+function redSliderChange(val) {
+	document.getElementById('redSlider').innerHTML=val;
+	red = val;
 	setBoxColor()
 }
 function greenSliderChange(val) {
-		
-	document.getElementById('greenSlider').innerHTML=val;						
+	document.getElementById('greenSlider').innerHTML=val;
 	green = val;
 	setBoxColor()
 }
-function blueSliderChange(val) {		
-	document.getElementById('blueSlider').innerHTML=val;						
-	blue = val;	
+function blueSliderChange(val) {
+	document.getElementById('blueSlider').innerHTML=val;
+	blue = val;
 	setBoxColor()
 }
 
-function setBoxColor() {	
-	temp=""
+function setBoxColor() {
+	temp="";
 	outputColor=temp.concat("rgb(",red,",",green,",",blue,")");
 	$("#colorBox").css("background-color", outputColor);
 }
 
-function resetBoxColor() {	
-	temp=""
-	outputColor=temp.concat("rgb(",255,",",255,",",255,")");	
+function resetBoxColor() {
+	temp="";
+	outputColor=temp.concat("rgb(",255,",",255,",",255,")");
 	$("#colorBox").css("background-color", outputColor);
 	var elementExists = document.getElementById("compareBox");
 	if (elementExists)
 	{
-		
-			document.getElementById("colorBox").removeChild(elementExists);
+		document.getElementById("colorBox").innerHTML='';
 	}
 }
 
 function startGame()
 {
 	resetBoxColor();
-	setRandomColor();		
-	countUp();	
+	setRandomColor();
+	countUp();
 }
 
 function countUp()
@@ -105,9 +104,9 @@ function countUp()
 			  if(timeleft <= 0)
 			  {
 				 resetBoxColor();
-				document.getElementById("colorBox").innerHTML = "";				
-				clearInterval(countdownTimer);				
-				enableButtons();				
+				document.getElementById("colorBox").innerHTML = "";
+				clearInterval(countdownTimer);
+				enableButtons();
 				countDown();
 			  }
 			},1000);
@@ -126,9 +125,9 @@ function countUpFast()
 			  if(timeleft <= 0)
 			  {
 				 resetBoxColor();
-				document.getElementById("colorBox").innerHTML = "";				
-				clearInterval(countdownTimer);				
-				enableButtons();				
+				document.getElementById("colorBox").innerHTML = "";
+				clearInterval(countdownTimer);
+				enableButtons();
 				countDownFast();
 			  }
 			},1000);
@@ -233,6 +232,9 @@ function compareColors()
 		redDist =Math.abs(originalRed - finalRed);
 		greenDist =Math.abs(originalGreen - finalGreen);
 		blueDist = Math.abs(originalBlue-finalBlue);
+		redCompare = originalRed - finalRed
+		blueCompare = originalBlue - finalBlue;
+		greenCompare = originalGreen - finalGreen;
 		finalDist = Math.sqrt(Math.pow(redDist,2) + Math.pow(greenDist,2) + Math.pow(blueDist,2));
 		//(old - new )/ old percentage dist
 		var finalScore = (((((redDist+blueDist+greenDist)/3)-255)/255)*-100).toFixed(2);
@@ -246,6 +248,21 @@ function compareColors()
 		
 }
 
+function calculateTrend(redCompare, blueCompare, greenCompare){
+	//greater than 0 == not enough, less than 0 == too much
+	var msg ="";
+		if(redCompare < 0) msg +="Too Much Red by: "+ Math.abs(redCompare) + "\n"; 
+		if(redCompare > 0) msg +="Too Little Red by: "+ Math.abs(redCompare)+ "\n";
+		if(redCompare == 0) msg +="You got Red exactly right!"+ "\n";
+		if(greenCompare < 0) msg +="Too Much Green by: "+ Math.abs(greenCompare)+ "\n";
+		if(greenCompare < 0) msg +="Too Much Green by: "+ Math.abs(greenCompare)+ "\n";
+		if(greenCompare == 0) msg +="Too Much Green by: "+ Math.abs(greenCompare)+ "\n";
+		if(blueCompare < 0) msg +="Too Much Blue by: "+ Math.abs(blueCompare)+ "\n";
+		if(blueCompare < 0) msg +="Too Much Blue by: "+ Math.abs(blueCompare)+ "\n";
+		if(blueCompare == 0) msg +="Too Much Blue by: "+ Math.abs(blueCompare)+ "\n";
+	return msg;	
+}
+
 function speedRound()
 {
 		setRandomColor();
@@ -256,17 +273,22 @@ function speedRound()
 function displayComparison()
 {	
 	temp="";
-	temp2 = "";
+	temp2 = "";	
 	newColor=temp.concat("rgb(",finalRed,",",finalGreen,",",finalBlue,")");
 	oldColor =temp2.concat("rgb(",originalRed,",",originalGreen,",",originalBlue,")");
 	console.log(outputColor);
 	var originalDiv = document.getElementById('colorBox');
 	var comparDiv = document.createElement("div");
+	var origInfo = document.createElement("div");
 	comparDiv.id = "compareBox";
+	origInfo.id = "origInfo";
 	document.getElementById("colorBox").appendChild(comparDiv);
-	$("#compareBox").css("background-color", outputColor);
-	comparDiv.innerHTML = "Your Guess";
+	document.getElementById("colorBox").appendChild(origInfo);
+	$("#compareBox").css("background-color", outputColor);	
 	$('#colorBox').css("background-color", oldColor);
+	var msg = calculateTrend(redCompare, blueCompare, greenCompare);
+	comparDiv.innerHTML = `Your Guess <br>` +  `Red: ` + finalRed +`<br>` + `Green: ` + finalGreen +`<br>` +`Blue: ` + finalBlue;	
+	origInfo.innerHTML = `Actual Color <br>` +  `Red: ` + originalRed +`<br>` + `Green: ` + originalGreen +`<br>` +`Blue: ` + originalBlue;	
 }
 
 function scoreGame()

@@ -7,11 +7,12 @@
     <meta charset="utf-8">
     <title>title</title>
     <link rel="stylesheet" href="style.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+	<script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
     <script src="script.js"></script>
-	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />	
   </head>
   <body>
-  
 	<div class = "outerDiv">
 	<img src = "colorllama.svg" class = "logo" />
 		<div id = "colorBox" class = "box"></div>
@@ -48,5 +49,6 @@
 					<!--button id ="speedRound" onclick="speedRound()">Speed Round</button-->
 					<button id ="compare" onclick="stopTimer()">Compare</button>
 				</div>
+				<script>flagManagement()</script>
   </body>
 </html>

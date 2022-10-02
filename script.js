@@ -23,6 +23,24 @@ var finalDist=0;
 var redCompare = greenCompare = blueCompare = 0;
 var  countdownTimer;
 
+function flagManagement(){
+
+	var user = {
+		name: 'Bob Loblaw',
+        key: 'example-user-key',
+	};
+	// Create a new LDClient instance with your environment-specific SDK key
+	var ldclient = LDClient.initialize('6334f46ca0e6a6116c4053b0', user);
+
+	function render() {
+	  var flagValue = ldclient.variation('myFirstFlag', false);
+	  if(flagValue) showBanner();
+	  console.log(flagValue);
+	}
+
+	ldclient.on('ready', render);
+	//ldclient.on('change', render);
+}
 
 function getRandomColor() {
   
@@ -44,6 +62,24 @@ function getRandomColor() {
   red=green=blue = 255;
   
     return color;  
+}
+
+function showBanner(){
+	var div = document.createElement('div');
+	div.style.cssText = 'width:100%;height:5%;position:fixed; z-index:9999;background:#000;bottom:0px;color:#fff;text-align:center;opacity:35%';
+	div.innerText = "One of these days, this site will use cookies.";
+	document.body.insertBefore(div,document.body.firstChild);
+}
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
 }
 
 function setRandomColor() {	
